@@ -25,7 +25,7 @@ class DatabaseHelper {
     String path = join(await getDatabasesPath(), 'code_numerique.db');
     return await openDatabase(
       path,
-      version: 2,
+      version: 3,
       onCreate: _onCreate,
       onUpgrade: _onUpgrade,
     );
@@ -38,6 +38,46 @@ class DatabaseHelper {
           id INTEGER PRIMARY KEY AUTOINCREMENT,
           article_id INTEGER,
           FOREIGN KEY(article_id) REFERENCES articles(id)
+        )
+      ''');
+    }
+    if (oldVersion < 3) {
+      // Recréer les tables de données pour forcer le rechargement du JSON actualisé
+      await db.execute('DROP TABLE IF EXISTS articles');
+      await db.execute('DROP TABLE IF EXISTS chapters');
+      await db.execute('DROP TABLE IF EXISTS titles');
+      await db.execute('DROP TABLE IF EXISTS books');
+
+      await db.execute('''
+        CREATE TABLE books(
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          title TEXT
+        )
+      ''');
+      await db.execute('''
+        CREATE TABLE titles(
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          title TEXT,
+          book_id INTEGER,
+          FOREIGN KEY(book_id) REFERENCES books(id)
+        )
+      ''');
+      await db.execute('''
+        CREATE TABLE chapters(
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          title TEXT,
+          title_id INTEGER,
+          FOREIGN KEY(title_id) REFERENCES titles(id)
+        )
+      ''');
+      await db.execute('''
+        CREATE TABLE articles(
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          numero TEXT,
+          titre TEXT,
+          texte TEXT,
+          chapter_id INTEGER,
+          FOREIGN KEY(chapter_id) REFERENCES chapters(id)
         )
       ''');
     }
