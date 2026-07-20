@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../models/code_models.dart';
 import '../services/database_helper.dart';
+import 'markdown_text.dart';
 
 class ArticleCard extends StatefulWidget {
   final Article article;
@@ -89,31 +90,6 @@ class _ArticleCardState extends State<ArticleCard> {
     return spans;
   }
 
-  Widget _buildHighlightedText(
-    String text,
-    String query,
-    BuildContext context, {
-    TextStyle? style,
-    int? maxLines,
-    TextOverflow? overflow,
-  }) {
-    if (query.isEmpty) {
-      return Text(
-        text,
-        style: style,
-        maxLines: maxLines,
-        overflow: overflow,
-        textAlign: TextAlign.justify,
-      );
-    }
-
-    return Text.rich(
-      TextSpan(children: _getHighlightedSpans(text, query, context, style: style)),
-      maxLines: maxLines,
-      overflow: overflow ?? TextOverflow.clip,
-      textAlign: TextAlign.justify,
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -198,10 +174,9 @@ class _ArticleCardState extends State<ArticleCard> {
                 ],
               ),
               const SizedBox(height: 12),
-              _buildHighlightedText(
-                widget.article.texte,
-                widget.highlightedQuery ?? '',
-                context,
+              MarkdownText(
+                text: widget.article.texte,
+                query: widget.highlightedQuery ?? '',
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       height: 1.6,
                       fontSize: 16,

@@ -1,0 +1,59 @@
+[
+  {
+    "id": "2020-35",
+    "title": "Loi N° 2020-35 du 06 janvier 2021",
+    "subtitle": "Loi modifiant la loi n° 2017-20 du 20 avril 2018 portant code du numérique en République du Bénin",
+    "date_adoption": "10 décembre 2020",
+    "date_promulgation": "06 janvier 2021",
+    "promulgator": "Patrice TALON",
+    "signatories": [
+      {
+        "name": "Patrice TALON",
+        "role": "Président de la République, Chef de l'État, Chef du Gouvernement"
+      },
+      {
+        "name": "Séverin Maxime QUENUM",
+        "role": "Garde des Sceaux, Ministre de la Justice et de la Législation"
+      },
+      {
+        "name": "Aurélie I. ADAM SOULE ZOUMAROU",
+        "role": "Ministre du Numérique et de la Digitalisation"
+      }
+    ],
+    "articles": [
+      {
+        "numero": "Article 1er",
+        "description": "Modifications des articles 121, 125 et 464 du Code du numérique",
+        "modifications": [
+          {
+            "article_original": "Article 121",
+            "titre": "Organes de l'Autorité de régulation",
+            "nouveau_texte": "Les organes de l'Autorité de régulation des communications électroniques et de la poste sont le Conseil de régulation et le Secrétariat exécutif.\n\nLe Conseil de régulation est constitué de cinq (05) conseillers.\n\nLe Secrétariat exécutif est composé du Secrétaire exécutif et des autres membres du personnel."
+          },
+          {
+            "article_original": "Article 125",
+            "titre": "Membres du Conseil de régulation",
+            "nouveau_texte": "Les membres du Conseil de régulation sont désignés, à l'issue d'une procédure d'appel à candidatures, sur la base de leurs qualités morales, de leurs compétences et expériences professionnelles avérées dans le domaine des communications électroniques et de la poste aux plans technique, économique et/ou juridique.\n\nIls sont sélectionnés parmi des cadres ayant totalisé au moins dix (10) ans d'expérience professionnelle.\n\nIls sont nommés par décret pris en Conseil des ministres sur proposition du ministre chargé des communications électroniques, pour un mandat de cinq (05) ans, renouvelable une fois.\n\nLes modalités de la procédure d'appel à candidatures sont fixées par décret pris en Conseil des ministres.\n\nAvant la fin de leur mandat, les membres du Conseil de régulation ne peuvent être suspendus ou révoqués que pour faute lourde dûment constatée."
+          },
+          {
+            "article_original": "Article 464",
+            "titre": "Composition",
+            "nouveau_texte": "L'Autorité de protection des données à caractère personnel est composée de huit (08) membres ainsi qu'il suit :\n- trois (03) députés désignés par l'Assemblée nationale en tenant compte de sa configuration politique ;\n- deux (02) personnes qualifiées pour leur connaissance des services de communications électroniques ayant un diplôme sanctionnant au moins cinq (05) années d'études universitaires et totalisant au moins dix (10) années d'expérience, désignées par l'Assemblée nationale, en tenant compte de sa configuration politique ;\n- une (01) personnalité désignée par le président de la République ;\n- un (01) magistrat élu par ses pairs ;\n- un (01) avocat ayant au moins quinze (15) années d'expérience, élu par ses pairs.\n\nL'Autorité est dirigée par un Bureau composé d'un président et d'un rapporteur élus en son sein."
+          }
+        ]
+      },
+      {
+        "numero": "Article 2",
+        "texte": "La dénomination « ministre des Communications électroniques et de la Poste » ou « ministre chargé des communications électroniques et de la Poste » est remplacée par celle de « ministre chargé des communications électroniques » dans toutes les dispositions de la loi n° 2017-20 du 20 avril 2018 portant code du numérique en République du Bénin."
+      },
+      {
+        "numero": "Article 3",
+        "texte": "Nonobstant les dispositions de la présente loi relatives à la composition de l'Autorité de régulation des communications électroniques et de la poste et de l'Autorité de protection des données à caractère personnel, les membres en exercice restent en fonction jusqu'à l'installation des nouvelles mandatures."
+      },
+      {
+        "numero": "Article 4",
+        "texte": "La présente loi sera publiée au Journal officiel et exécutée comme Loi de l'État."
+      }
+    ]
+  }
+]

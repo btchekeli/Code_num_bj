@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../screens/favorites_screen.dart';
 import '../screens/all_titles_screen.dart';
 import '../screens/all_articles_screen.dart';
+import '../screens/law_modifications_screen.dart';
 import '../screens/about_screen.dart';
 
 class CodeNumDrawer extends StatelessWidget {
@@ -44,7 +45,7 @@ class CodeNumDrawer extends StatelessWidget {
                                       .onPrimaryContainer,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18,
-                                ),
+                                  ),
                       ),
                     ],
                   ),
@@ -54,7 +55,7 @@ class CodeNumDrawer extends StatelessWidget {
           ),
           Expanded(
             child: ListView(
-              padding: EdgeInsets.only(
+              padding: const EdgeInsets.only(
                 left: 10,
               ),
               children: [
@@ -91,6 +92,18 @@ class CodeNumDrawer extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (context) => const AllArticlesScreen()),
+                    );
+                  },
+                ),
+                ListTile(
+                  leading: const Icon(Icons.history_edu_rounded),
+                  title: const Text('Modifications de lois'),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const LawModificationsScreen()),
                     );
                   },
                 ),

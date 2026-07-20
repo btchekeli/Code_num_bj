@@ -4,6 +4,7 @@ import 'package:share_plus/share_plus.dart';
 import '../models/code_models.dart';
 import '../services/database_helper.dart';
 import '../widgets/code_num_app_bar.dart';
+import '../widgets/markdown_text.dart';
 
 class ArticleDetailScreen extends StatefulWidget {
   final List<Article> articles;
@@ -117,14 +118,13 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
                 ),
                 const SizedBox(height: 16),
                 // Article Text
-                Text(
-                  article.texte,
+                MarkdownText(
+                  text: article.texte,
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         height: 1.8,
                         fontSize: 15,
                         letterSpacing: 0.3,
                       ),
-                  textAlign: TextAlign.justify,
                 ),
                 const SizedBox(height: 100), // Space for bottom actions
               ],

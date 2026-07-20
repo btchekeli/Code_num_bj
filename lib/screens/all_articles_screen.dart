@@ -3,6 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import '../services/database_helper.dart';
 import '../models/code_models.dart';
 import '../widgets/code_num_app_bar.dart';
+import '../widgets/markdown_text.dart';
 import 'article_detail_screen.dart';
 
 class AllArticlesScreen extends StatelessWidget {
@@ -105,13 +106,14 @@ class AllArticlesScreen extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 16),
-              Text(
-                previewText,
+              MarkdownText(
+                text: previewText,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       height: 1.5,
                       color: Theme.of(context).colorScheme.onSurface,
                     ),
-                textAlign: TextAlign.justify,
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
               ),
               const SizedBox(height: 16),
               const Divider(height: 1),
