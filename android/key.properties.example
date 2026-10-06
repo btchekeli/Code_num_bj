@@ -1,0 +1,8 @@
+# Exemple de configuration de signature pour la publication Play Store
+# Renommez ce fichier en "key.properties" dans le dossier android/ (il est ignoré par git)
+# et renseignez vos informations réelles.
+
+storePassword=monMotDePasseKeystore
+keyPassword=monMotDePasseCle
+keyAlias=upload
+storeFile=../upload-keystore.jks

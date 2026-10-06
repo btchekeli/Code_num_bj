@@ -1,4 +1,4 @@
-package com.example.codenumapp
+package com.btchekeli.codenumbj
 
 import io.flutter.embedding.android.FlutterActivity
 
