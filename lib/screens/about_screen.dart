@@ -61,21 +61,29 @@ class AboutScreen extends StatelessWidget {
             const SizedBox(height: 32),
             _buildSectionTitle(context, 'Développement'),
             const SizedBox(height: 12),
-            _buildInfoCard(
+            _buildContributorCard(
               context,
-              "Développé par :\nBrunel TCHEKELI.  \n \n Site web : https://btchekeli.github.io/",
               icon: Icons.code_rounded,
+              title: 'Développé par :',
+              contributors: [
+                'Brunel TCHEKELI',
+              ],
+              extra: 'Site web : https://btchekeli.github.io/',
             ).animate().fadeIn(delay: 800.ms).slideX(begin: 0.1),
-            const SizedBox(height: 48),
-            _buildInfoCard(
+            const SizedBox(height: 24),
+            _buildContributorCard(
               context,
-              "Assistances, corrections et relectures :\nChristella W. DEKADJEVI.  \n \n Ozias Jawu AHOUSSINOU\n",
-              icon: Icons.code_rounded,
-            ).animate().fadeIn(delay: 800.ms).slideX(begin: 0.1),
+              icon: Icons.edit_note_rounded,
+              title: 'Assistances, corrections et relectures :',
+              contributors: [
+                'Christella W. DEKADJEVI',
+                'Ozias Jawu AHOUSSINOU',
+              ],
+            ).animate().fadeIn(delay: 900.ms).slideX(begin: 0.1),
             const SizedBox(height: 48),
             Center(
               child: Text(
-                '© 2026 Tous droits réservés',
+                'Développé avec amour',
                 style: Theme.of(context).textTheme.bodySmall,
               ),
             ),
@@ -126,6 +134,101 @@ class AboutScreen extends StatelessWidget {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildContributorCard(
+    BuildContext context, {
+    required IconData icon,
+    required String title,
+    required List<String> contributors,
+    String? extra,
+  }) {
+    final theme = Theme.of(context);
+    return Card(
+      elevation: 0,
+      color: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+        side: BorderSide(
+          color: theme.colorScheme.outlineVariant,
+        ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(icon, color: theme.colorScheme.primary),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      color: theme.colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  ...contributors.map(
+                    (name) => Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 4.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            name,
+                            style: theme.textTheme.bodyLarge?.copyWith(
+                              fontWeight: FontWeight.w600,
+                              color: theme.colorScheme.onSurface,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          _buildLinkedInBadge(),
+                        ],
+                      ),
+                    ),
+                  ),
+                  if (extra != null) ...[
+                    const SizedBox(height: 10),
+                    Text(
+                      extra,
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: theme.colorScheme.onSurfaceVariant,
+                        height: 1.4,
+                      ),
+                    ),
+                  ],
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildLinkedInBadge() {
+    return Container(
+      width: 20,
+      height: 20,
+      decoration: BoxDecoration(
+        color: const Color(0xFF0A66C2), // Bleu officiel LinkedIn
+        borderRadius: BorderRadius.circular(4),
+      ),
+      alignment: Alignment.center,
+      child: const Text(
+        'in',
+        style: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+          fontSize: 12,
+          fontFamily: 'sans-serif',
+          height: 1.0,
         ),
       ),
     );

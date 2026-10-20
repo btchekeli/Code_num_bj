@@ -84,9 +84,9 @@ class CodeNumAppBar extends StatelessWidget implements PreferredSizeWidget {
                     Expanded(
                       child: Slider(
                         value: settings.textScaleFactor,
-                        min: 0.8,
-                        max: 1.0,
-                        divisions: 6,
+                        min: 0.85,
+                        max: 1.45,
+                        divisions: 12,
                         label: '${(settings.textScaleFactor * 100).round()}%',
                         onChanged: (value) {
                           settings.updateTextScale(value);

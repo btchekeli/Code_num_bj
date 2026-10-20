@@ -4,9 +4,11 @@ class Article {
   final String? titre;
   final String texte;
   final int chapterId;
+  final int? sectionId;
   final String? bookTitle;
   final String? titleTitle;
   final String? chapterTitle;
+  final String? sectionTitle;
 
   Article({
     this.id,
@@ -14,9 +16,11 @@ class Article {
     this.titre,
     required this.texte,
     required this.chapterId,
+    this.sectionId,
     this.bookTitle,
     this.titleTitle,
     this.chapterTitle,
+    this.sectionTitle,
   });
 
   Map<String, dynamic> toMap() {
@@ -26,9 +30,11 @@ class Article {
       'titre': titre,
       'texte': texte,
       'chapter_id': chapterId,
+      'section_id': sectionId,
       'book_title': bookTitle,
       'title_title': titleTitle,
       'chapter_title': chapterTitle,
+      'section_title': sectionTitle,
     };
   }
 
@@ -39,9 +45,47 @@ class Article {
       titre: map['titre'],
       texte: map['texte'],
       chapterId: map['chapter_id'],
+      sectionId: map['section_id'],
       bookTitle: map['book_title'],
       titleTitle: map['title_title'],
       chapterTitle: map['chapter_title'],
+      sectionTitle: map['section_title'],
+    );
+  }
+}
+
+class Section {
+  final int? id;
+  final String title;
+  final int chapterId;
+  final String? startArticle;
+  final String? endArticle;
+  final List<Article> articles;
+
+  Section({
+    this.id,
+    required this.title,
+    required this.chapterId,
+    this.startArticle,
+    this.endArticle,
+    this.articles = const [],
+  });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'title': title,
+      'chapter_id': chapterId,
+    };
+  }
+
+  factory Section.fromMap(Map<String, dynamic> map) {
+    return Section(
+      id: map['id'],
+      title: map['title'],
+      chapterId: map['chapter_id'],
+      startArticle: map['start_article'],
+      endArticle: map['end_article'],
     );
   }
 }
@@ -50,12 +94,18 @@ class Chapter {
   final int? id;
   final String title;
   final int titleId;
+  final String? startArticle;
+  final String? endArticle;
+  final List<Section> sections;
   final List<Article> articles;
 
   Chapter({
     this.id,
     required this.title,
     required this.titleId,
+    this.startArticle,
+    this.endArticle,
+    this.sections = const [],
     this.articles = const [],
   });
 
@@ -72,6 +122,8 @@ class Chapter {
       id: map['id'],
       title: map['title'],
       titleId: map['title_id'],
+      startArticle: map['start_article'],
+      endArticle: map['end_article'],
     );
   }
 }

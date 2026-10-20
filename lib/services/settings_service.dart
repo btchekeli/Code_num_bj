@@ -10,7 +10,7 @@ class SettingsService extends ChangeNotifier {
   SettingsService._internal();
 
   ThemeMode _themeMode = ThemeMode.light;
-  double _textScaleFactor = 1.0;
+  double _textScaleFactor = 1.10;
 
   ThemeMode get themeMode => _themeMode;
   double get textScaleFactor => _textScaleFactor;
@@ -25,7 +25,7 @@ class SettingsService extends ChangeNotifier {
   }
 
   void updateTextScale(double scale) {
-    _textScaleFactor = scale.clamp(0.8, 1.0); // Limit scale range
+    _textScaleFactor = scale.clamp(0.85, 1.45); // Limit scale range
     notifyListeners();
   }
 }

@@ -92,15 +92,30 @@ class AllTitlesScreen extends StatelessWidget {
                     final chapters = await DatabaseHelper().getChapters(item.id!);
                     if (!context.mounted) return;
                     if (chapters.length == 1 && chapters.first.title.toLowerCase().contains("unique")) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ArticleListScreen(
-                            chapterTitle: item.title.toLowerCase().contains('unique') ? (item.bookTitle ?? 'Articles') : item.title,
-                            chapterId: chapters.first.id!,
+                      final hasSec = await DatabaseHelper().hasSections(chapters.first.id!);
+                      if (!context.mounted) return;
+                      if (hasSec) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ContentScreen(
+                              title: item.title.toLowerCase().contains('unique') ? (item.bookTitle ?? 'Sections') : item.title,
+                              type: ContentType.section,
+                              parentId: chapters.first.id!,
+                            ),
                           ),
-                        ),
-                      );
+                        );
+                      } else {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ArticleListScreen(
+                              chapterTitle: item.title.toLowerCase().contains('unique') ? (item.bookTitle ?? 'Articles') : item.title,
+                              chapterId: chapters.first.id!,
+                            ),
+                          ),
+                        );
+                      }
                     } else {
                       Navigator.push(
                         context,

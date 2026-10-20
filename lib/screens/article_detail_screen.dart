@@ -85,8 +85,14 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
                     children: [
                       _buildBreadcrumbItem(context, '', article.bookTitle),
                       _buildBreadcrumbItem(context, '', article.titleTitle),
-                      _buildBreadcrumbItem(context, '', article.chapterTitle,
-                          isLast: true),
+                      _buildBreadcrumbItem(
+                        context,
+                        '',
+                        article.chapterTitle,
+                        isLast: article.sectionTitle == null || article.sectionTitle!.isEmpty,
+                      ),
+                      if (article.sectionTitle != null && article.sectionTitle!.isNotEmpty)
+                        _buildBreadcrumbItem(context, '', article.sectionTitle, isLast: true),
                     ],
                   ),
                 ),
@@ -122,7 +128,7 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
                   text: article.texte,
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         height: 1.8,
-                        fontSize: 15,
+                        fontSize: 16.5,
                         letterSpacing: 0.3,
                       ),
                 ),
@@ -291,7 +297,7 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
             Text(
               label,
               style: TextStyle(
-                fontSize: 10,
+                fontSize: 11.5,
                 color: isDisabled
                     ? Colors.grey.withValues(alpha: 0.5)
                     : (color ?? Theme.of(context).colorScheme.onSurfaceVariant),

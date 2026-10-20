@@ -128,8 +128,7 @@ class AllArticlesScreen extends StatelessWidget {
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
-                      _formatText(
-                          "${article.bookTitle} > ${article.titleTitle}"),
+                      _formatBreadcrumb(article),
                       style: Theme.of(context).textTheme.labelSmall?.copyWith(
                             color: Theme.of(context).colorScheme.secondary,
                             fontWeight: FontWeight.w500,
@@ -145,6 +144,27 @@ class AllArticlesScreen extends StatelessWidget {
         ),
       ),
     ).animate().fadeIn(delay: (40 * (index > 15 ? 15 : index)).ms).slideY(begin: 0.1);
+  }
+
+  String _formatBreadcrumb(Article article) {
+    final parts = <String>[];
+    if (article.bookTitle != null && article.bookTitle!.isNotEmpty) {
+      parts.add(article.bookTitle!);
+    }
+    if (article.titleTitle != null &&
+        article.titleTitle!.isNotEmpty &&
+        !article.titleTitle!.toLowerCase().contains('unique')) {
+      parts.add(article.titleTitle!);
+    }
+    if (article.chapterTitle != null &&
+        article.chapterTitle!.isNotEmpty &&
+        !article.chapterTitle!.toLowerCase().contains('unique')) {
+      parts.add(article.chapterTitle!);
+    }
+    if (article.sectionTitle != null && article.sectionTitle!.isNotEmpty) {
+      parts.add(article.sectionTitle!);
+    }
+    return _formatText(parts.join(' > '));
   }
 
   String _formatText(String text) {

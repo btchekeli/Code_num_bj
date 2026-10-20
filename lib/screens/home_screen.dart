@@ -58,16 +58,32 @@ class HomeScreen extends StatelessWidget {
                       final chapters = await DatabaseHelper().getChapters(titles.first.id!);
                       if (!context.mounted) return;
                       if (chapters.length == 1 && chapters.first.title.toLowerCase().contains("unique")) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ArticleListScreen(
-                              chapterTitle: book.title,
-                              chapterId: chapters.first.id!,
+                        final hasSec = await DatabaseHelper().hasSections(chapters.first.id!);
+                        if (!context.mounted) return;
+                        if (hasSec) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ContentScreen(
+                                title: book.title,
+                                type: ContentType.section,
+                                parentId: chapters.first.id!,
+                              ),
                             ),
-                          ),
-                        );
-                        return;
+                          );
+                          return;
+                        } else {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ArticleListScreen(
+                                chapterTitle: book.title,
+                                chapterId: chapters.first.id!,
+                              ),
+                            ),
+                          );
+                          return;
+                        }
                       } else {
                         Navigator.push(
                           context,

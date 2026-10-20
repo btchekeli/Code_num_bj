@@ -4,6 +4,7 @@ import '../screens/all_titles_screen.dart';
 import '../screens/all_articles_screen.dart';
 import '../screens/law_modifications_screen.dart';
 import '../screens/about_screen.dart';
+import '../services/pdf_service.dart';
 
 class CodeNumDrawer extends StatelessWidget {
   const CodeNumDrawer({super.key});
@@ -45,7 +46,7 @@ class CodeNumDrawer extends StatelessWidget {
                                       .onPrimaryContainer,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18,
-                                  ),
+                                ),
                       ),
                     ],
                   ),
@@ -105,6 +106,18 @@ class CodeNumDrawer extends StatelessWidget {
                       MaterialPageRoute(
                           builder: (context) => const LawModificationsScreen()),
                     );
+                  },
+                ),
+                ListTile(
+                  leading: Icon(
+                    Icons.picture_as_pdf_rounded,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                  title: const Text('Télécharger le Code'),
+                  subtitle: const Text('Version officielle consolidée'),
+                  onTap: () {
+                    Navigator.pop(context);
+                    PdfService.showDownloadModal(context);
                   },
                 ),
               ],

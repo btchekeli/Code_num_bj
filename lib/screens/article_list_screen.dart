@@ -8,11 +8,13 @@ import 'article_detail_screen.dart';
 class ArticleListScreen extends StatelessWidget {
   final String chapterTitle;
   final int chapterId;
+  final int? sectionId;
 
   const ArticleListScreen({
     super.key,
     required this.chapterTitle,
     required this.chapterId,
+    this.sectionId,
   });
 
   @override
@@ -20,7 +22,9 @@ class ArticleListScreen extends StatelessWidget {
     return Scaffold(
       appBar: CodeNumAppBar(title: chapterTitle),
       body: FutureBuilder<List<Article>>(
-        future: DatabaseHelper().getArticles(chapterId),
+        future: sectionId != null
+            ? DatabaseHelper().getArticlesBySection(sectionId!)
+            : DatabaseHelper().getArticles(chapterId),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
