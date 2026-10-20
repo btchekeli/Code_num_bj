@@ -25,8 +25,9 @@ class AllArticlesScreen extends StatelessWidget {
           }
 
           final articles = snapshot.data!;
+          final bottomPadding = MediaQuery.paddingOf(context).bottom;
           return ListView.builder(
-            padding: const EdgeInsets.all(20),
+            padding: EdgeInsets.fromLTRB(20, 20, 20, 40 + bottomPadding),
             itemCount: articles.length,
             itemBuilder: (context, index) {
               final article = articles[index];

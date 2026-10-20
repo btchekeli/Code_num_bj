@@ -25,8 +25,9 @@ class AllTitlesScreen extends StatelessWidget {
           }
 
           final titles = snapshot.data!;
+          final bottomPadding = MediaQuery.paddingOf(context).bottom;
           return ListView.separated(
-            padding: const EdgeInsets.all(16),
+            padding: EdgeInsets.fromLTRB(16, 16, 16, 40 + bottomPadding),
             itemCount: titles.length,
             separatorBuilder: (context, index) => const SizedBox(height: 12),
             itemBuilder: (context, index) {

@@ -29,11 +29,9 @@ class HomeScreen extends StatelessWidget {
           }
 
           final books = snapshot.data!;
+          final bottomPadding = MediaQuery.paddingOf(context).bottom;
           return ListView.builder(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 30,
-            ),
+            padding: EdgeInsets.fromLTRB(16, 20, 16, 40 + bottomPadding),
             itemCount: books.length,
             itemBuilder: (context, index) {
               final book = books[index];

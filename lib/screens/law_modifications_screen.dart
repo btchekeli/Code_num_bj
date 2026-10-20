@@ -76,8 +76,9 @@ class _LawModificationsScreenState extends State<LawModificationsScreen> {
           }
 
           final modifications = snapshot.data!;
+          final bottomPadding = MediaQuery.paddingOf(context).bottom;
           return ListView.builder(
-            padding: const EdgeInsets.all(16.0),
+            padding: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 40 + bottomPadding),
             itemCount: modifications.length,
             itemBuilder: (context, index) {
               final modification = modifications[index];

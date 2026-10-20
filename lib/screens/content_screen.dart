@@ -57,8 +57,9 @@ class ContentScreen extends StatelessWidget {
           }
 
           final items = snapshot.data!;
+          final bottomPadding = MediaQuery.paddingOf(context).bottom;
           return ListView.separated(
-            padding: const EdgeInsets.all(16),
+            padding: EdgeInsets.fromLTRB(16, 16, 16, 40 + bottomPadding),
             itemCount: items.length,
             separatorBuilder: (context, index) => const SizedBox(height: 12),
             itemBuilder: (context, index) {

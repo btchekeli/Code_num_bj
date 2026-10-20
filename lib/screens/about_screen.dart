@@ -11,7 +11,12 @@ class AboutScreen extends StatelessWidget {
         title: const Text('À propos'),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(24.0),
+        padding: EdgeInsets.fromLTRB(
+          24.0,
+          24.0,
+          24.0,
+          40 + MediaQuery.paddingOf(context).bottom,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

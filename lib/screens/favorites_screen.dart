@@ -29,8 +29,9 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
           }
 
           final articles = snapshot.data!;
+          final bottomPadding = MediaQuery.paddingOf(context).bottom;
           return ListView.builder(
-            padding: const EdgeInsets.all(16),
+            padding: EdgeInsets.fromLTRB(16, 16, 16, 40 + bottomPadding),
             itemCount: articles.length,
             itemBuilder: (context, index) {
               return ArticleCard(
