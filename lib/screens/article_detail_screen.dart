@@ -37,11 +37,6 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
     super.dispose();
   }
 
-  String _formatText(String text) {
-    if (text.isEmpty) return text;
-    final lower = text.toLowerCase();
-    return lower[0].toUpperCase() + lower.substring(1);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,16 +78,16 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      _buildBreadcrumbItem(context, '', article.bookTitle),
-                      _buildBreadcrumbItem(context, '', article.titleTitle),
+                      _buildBreadcrumbItem(context, '', article.bookTitle?.toUpperCase()),
+                      _buildBreadcrumbItem(context, '', article.titleTitle?.toUpperCase()),
                       _buildBreadcrumbItem(
                         context,
                         '',
-                        article.chapterTitle,
+                        article.chapterTitle?.toUpperCase(),
                         isLast: article.sectionTitle == null || article.sectionTitle!.isEmpty,
                       ),
                       if (article.sectionTitle != null && article.sectionTitle!.isNotEmpty)
-                        _buildBreadcrumbItem(context, '', article.sectionTitle, isLast: true),
+                        _buildBreadcrumbItem(context, '', article.sectionTitle?.toUpperCase(), isLast: true),
                     ],
                   ),
                 ),
@@ -161,7 +156,7 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
           ),
           //const SizedBox(height: 2),
           Text(
-            _formatText(value),
+            value,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   fontWeight: FontWeight.w500,
                 ),

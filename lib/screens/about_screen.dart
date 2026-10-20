@@ -61,10 +61,10 @@ class AboutScreen extends StatelessWidget {
             const SizedBox(height: 12),
             _buildInfoCard(
               context,
-              "Loi n° 2017-20 portant code du numérique en République du Bénin. \n \nL’Assemblée nationale a délibéré et adopté en sa séance du mardi 13 juin 2017, la loi dont la teneur a été reproduite dans cette application",
+              "Loi n° 2017-20 du 20 avril 2018 portant code du numérique en République du Bénin, telle que modifiée par la loi n° 2020-35 du 06 janvier 2021. \n \nL’Assemblée nationale a délibéré et adopté en sa séance du mardi 13 juin 2017, la loi dont la teneur a été reproduite dans cette application",
             ).animate().fadeIn(delay: 600.ms).slideX(begin: 0.1),
             const SizedBox(height: 32),
-            _buildSectionTitle(context, 'Développement'),
+            _buildSectionTitle(context, 'Développeurs et contributeurs'),
             const SizedBox(height: 12),
             _buildContributorCard(
               context,
@@ -85,6 +85,16 @@ class AboutScreen extends StatelessWidget {
                 'Ozias Jawu AHOUSSINOU',
               ],
             ).animate().fadeIn(delay: 900.ms).slideX(begin: 0.1),
+            const SizedBox(height: 24),
+            _buildContributorCard(
+              context,
+              icon: Icons.code_rounded,
+              title: 'Demandes de corrections et suggestions',
+              contributors: [
+                'Contactez nous sur LinkedIn',
+              ],
+              extra: '',
+            ).animate().fadeIn(delay: 800.ms).slideX(begin: 0.1),
             const SizedBox(height: 48),
             Center(
               child: Text(

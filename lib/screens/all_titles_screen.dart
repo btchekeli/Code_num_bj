@@ -60,7 +60,9 @@ class AllTitlesScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        _formatText(item.title.toLowerCase().contains('unique') ? (item.bookTitle ?? 'Titre Unique') : item.title),
+                        _formatText(item.title.toLowerCase().contains('unique')
+                            ? (item.bookTitle ?? 'Titre Unique')
+                            : item.title),
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                               fontWeight: FontWeight.w600,
                             ),
@@ -70,7 +72,7 @@ class AllTitlesScreen extends StatelessWidget {
                           padding: const EdgeInsets.only(top: 4.0),
                           child: Text(
                             _formatText(
-                                "(Articles ${item.startArticle} à ${item.endArticle})"),
+                                "(${item.startArticle} à ${item.endArticle})"),
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyMedium
@@ -90,17 +92,22 @@ class AllTitlesScreen extends StatelessWidget {
                     color: Theme.of(context).colorScheme.primary,
                   ),
                   onTap: () async {
-                    final chapters = await DatabaseHelper().getChapters(item.id!);
+                    final chapters =
+                        await DatabaseHelper().getChapters(item.id!);
                     if (!context.mounted) return;
-                    if (chapters.length == 1 && chapters.first.title.toLowerCase().contains("unique")) {
-                      final hasSec = await DatabaseHelper().hasSections(chapters.first.id!);
+                    if (chapters.length == 1 &&
+                        chapters.first.title.toLowerCase().contains("unique")) {
+                      final hasSec = await DatabaseHelper()
+                          .hasSections(chapters.first.id!);
                       if (!context.mounted) return;
                       if (hasSec) {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => ContentScreen(
-                              title: item.title.toLowerCase().contains('unique') ? (item.bookTitle ?? 'Sections') : item.title,
+                              title: item.title.toLowerCase().contains('unique')
+                                  ? (item.bookTitle ?? 'Sections')
+                                  : item.title,
                               type: ContentType.section,
                               parentId: chapters.first.id!,
                             ),
@@ -111,7 +118,10 @@ class AllTitlesScreen extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder: (context) => ArticleListScreen(
-                              chapterTitle: item.title.toLowerCase().contains('unique') ? (item.bookTitle ?? 'Articles') : item.title,
+                              chapterTitle:
+                                  item.title.toLowerCase().contains('unique')
+                                      ? (item.bookTitle ?? 'Articles')
+                                      : item.title,
                               chapterId: chapters.first.id!,
                             ),
                           ),
@@ -122,7 +132,9 @@ class AllTitlesScreen extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) => ContentScreen(
-                            title: item.title.toLowerCase().contains('unique') ? (item.bookTitle ?? 'Titre Unique') : item.title,
+                            title: item.title.toLowerCase().contains('unique')
+                                ? (item.bookTitle ?? 'Titre Unique')
+                                : item.title,
                             type: ContentType.chapter,
                             parentId: item.id!,
                           ),
@@ -131,7 +143,10 @@ class AllTitlesScreen extends StatelessWidget {
                     }
                   },
                 ),
-              ).animate().fadeIn(delay: (20 * (index > 15 ? 15 : index)).ms).slideX(begin: 0.1);
+              )
+                  .animate()
+                  .fadeIn(delay: (20 * (index > 15 ? 15 : index)).ms)
+                  .slideX(begin: 0.1);
             },
           );
         },
