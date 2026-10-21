@@ -78,16 +78,16 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      _buildBreadcrumbItem(context, '', article.bookTitle?.toUpperCase()),
-                      _buildBreadcrumbItem(context, '', article.titleTitle?.toUpperCase()),
+                      _buildBreadcrumbItem(context, '', article.bookTitle),
+                      _buildBreadcrumbItem(context, '', article.titleTitle),
                       _buildBreadcrumbItem(
                         context,
                         '',
-                        article.chapterTitle?.toUpperCase(),
+                        article.chapterTitle,
                         isLast: article.sectionTitle == null || article.sectionTitle!.isEmpty,
                       ),
                       if (article.sectionTitle != null && article.sectionTitle!.isNotEmpty)
-                        _buildBreadcrumbItem(context, '', article.sectionTitle?.toUpperCase(), isLast: true),
+                        _buildBreadcrumbItem(context, '', article.sectionTitle, isLast: true),
                     ],
                   ),
                 ),
@@ -146,17 +146,17 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          if (label.isNotEmpty)
+            Text(
+              label.toUpperCase(),
+              style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                    color: Theme.of(context).colorScheme.secondary,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 1.2,
+                  ),
+            ),
           Text(
-            label.toUpperCase(),
-            style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                  color: Theme.of(context).colorScheme.secondary,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 1.2,
-                ),
-          ),
-          //const SizedBox(height: 2),
-          Text(
-            value,
+            value.toUpperCase(),
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   fontWeight: FontWeight.w500,
                 ),
