@@ -173,11 +173,15 @@ class TitleStruct {
 class Book {
   final int? id;
   final String title;
+  final String? startArticle;
+  final String? endArticle;
   final List<TitleStruct> titles;
 
   Book({
     this.id,
     required this.title,
+    this.startArticle,
+    this.endArticle,
     this.titles = const [],
   });
 
@@ -185,6 +189,8 @@ class Book {
     return {
       'id': id,
       'title': title,
+      'start_article': startArticle,
+      'end_article': endArticle,
     };
   }
 
@@ -192,6 +198,23 @@ class Book {
     return Book(
       id: map['id'],
       title: map['title'],
+      startArticle: map['start_article'],
+      endArticle: map['end_article'],
     );
   }
+}
+
+String formatArticlesRange(String? startArticle, String? endArticle) {
+  if (startArticle == null || endArticle == null) return '';
+  final startTrimmed = startArticle.trim();
+  final endTrimmed = endArticle.trim();
+  if (startTrimmed.isEmpty || endTrimmed.isEmpty) return '';
+
+  final cleanStart = startTrimmed.replaceFirst(RegExp(r'^articles?\s*', caseSensitive: false), '').trim();
+  final cleanEnd = endTrimmed.replaceFirst(RegExp(r'^articles?\s*', caseSensitive: false), '').trim();
+
+  if (cleanStart.toLowerCase() == cleanEnd.toLowerCase()) {
+    return '(Article $cleanStart)';
+  }
+  return '(Articles $cleanStart à $cleanEnd)';
 }

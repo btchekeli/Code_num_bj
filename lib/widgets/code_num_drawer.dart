@@ -12,137 +12,180 @@ class CodeNumDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: Column(
-        children: [
-          DrawerHeader(
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.primaryContainer,
+      child: MediaQuery(
+        data: MediaQuery.of(context).copyWith(
+          textScaler: TextScaler.noScaling,
+        ),
+        child: Column(
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.primaryContainer,
+              ),
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                        height: 75,
+                        child:
+                            Image.asset("assets/images/Icone_code_num_bj.png")),
+                    const SizedBox(height: 12),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.balance,
+                          size: 30,
+                          color: Theme.of(context).colorScheme.onPrimaryContainer,
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          'Code du numérique en\n République du Bénin',
+                          style:
+                              Theme.of(context).textTheme.headlineSmall?.copyWith(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onPrimaryContainer,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                  ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
             ),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+            Expanded(
+              child: ListView(
+                padding: const EdgeInsets.only(
+                  left: 10,
+                ),
                 children: [
-                  SizedBox(
-                      height: 75,
-                      child:
-                          Image.asset("assets/images/Icone_code_num_bj.png")),
-                  const SizedBox(height: 12),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.balance,
-                        size: 30,
-                        color: Theme.of(context).colorScheme.onPrimaryContainer,
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        'Code du numérique en\n République du Bénin',
-                        style:
-                            Theme.of(context).textTheme.headlineSmall?.copyWith(
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .onPrimaryContainer,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                ),
-                      ),
-                    ],
+                  ListTile(
+                    leading: const Icon(Icons.favorite),
+                    title: const Text('Favoris'),
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const FavoritesScreen()),
+                      );
+                    },
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.list_alt),
+                    title: const Text('Tous les titres'),
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const AllTitlesScreen()),
+                      );
+                    },
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.article),
+                    title: const Text('Tous les articles'),
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const AllArticlesScreen()),
+                      );
+                    },
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.history_edu_rounded),
+                    title: const Text('Modifications de lois'),
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const LawModificationsScreen()),
+                      );
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(
+                      Icons.picture_as_pdf_rounded,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                    title: const Text('Télécharger le Code'),
+                    subtitle: const Text('Version officielle consolidée'),
+                    onTap: () {
+                      Navigator.pop(context);
+                      PdfService.showDownloadModal(context);
+                    },
                   ),
                 ],
               ),
             ),
-          ),
-          Expanded(
-            child: ListView(
-              padding: const EdgeInsets.only(
-                left: 10,
-              ),
-              children: [
-                ListTile(
-                  leading: const Icon(Icons.favorite),
-                  title: const Text('Favoris'),
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const FavoritesScreen()),
-                    );
-                  },
+            const Divider(),
+            SafeArea(
+              top: false,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 45.0, left: 10),
+                child: Column(
+                  children: [
+                    ListTile(
+                      leading: Icon(
+                        Icons.warning_amber_rounded,
+                        color: Theme.of(context).colorScheme.error,
+                      ),
+                      title: const Text('Avertissement'),
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            icon: Icon(
+                              Icons.warning_amber_rounded,
+                              color: Theme.of(context).colorScheme.error,
+                              size: 40,
+                            ),
+                            title: const Text('Avertissement'),
+                            content: const Text(
+                              'En raison de l\'automatisation de certaines parties '
+                              'de cette application et malgré la relecture effectuée, '
+                              'les textes de lois peuvent contenir des erreurs.\n\n'
+                              'En cas de doute, veuillez vous référer à la version PDF '
+                              'téléchargeable depuis cette application ou au livre '
+                              'physique complet du Code du numérique.',
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.pop(context),
+                                child: const Text('Compris'),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                    ListTile(
+                      leading: const Icon(Icons.info_outline),
+                      title: const Text('À propos'),
+                      onTap: () {
+                        Navigator.pop(context);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const AboutScreen()),
+                        );
+                      },
+                    ),
+                  ],
                 ),
-                ListTile(
-                  leading: const Icon(Icons.list_alt),
-                  title: const Text('Tous les titres'),
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const AllTitlesScreen()),
-                    );
-                  },
-                ),
-                ListTile(
-                  leading: const Icon(Icons.article),
-                  title: const Text('Tous les articles'),
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const AllArticlesScreen()),
-                    );
-                  },
-                ),
-                ListTile(
-                  leading: const Icon(Icons.history_edu_rounded),
-                  title: const Text('Modifications de lois'),
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const LawModificationsScreen()),
-                    );
-                  },
-                ),
-                ListTile(
-                  leading: Icon(
-                    Icons.picture_as_pdf_rounded,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                  title: const Text('Télécharger le Code'),
-                  subtitle: const Text('Version officielle consolidée'),
-                  onTap: () {
-                    Navigator.pop(context);
-                    PdfService.showDownloadModal(context);
-                  },
-                ),
-              ],
-            ),
-          ),
-          const Divider(),
-          SafeArea(
-            top: false,
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 45.0, left: 10),
-              child: ListTile(
-                leading: const Icon(Icons.info_outline),
-                title: const Text('À propos'),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const AboutScreen()),
-                  );
-                },
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

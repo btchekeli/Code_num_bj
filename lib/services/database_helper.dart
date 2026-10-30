@@ -253,7 +253,19 @@ class DatabaseHelper {
 
   Future<List<Book>> getBooks() async {
     final db = await database;
-    final List<Map<String, dynamic>> maps = await db.query('books');
+    final List<Map<String, dynamic>> maps = await db.rawQuery('''
+      SELECT b.*,
+      (SELECT a.numero FROM articles a
+       JOIN chapters c ON c.id = a.chapter_id
+       JOIN titles t ON t.id = c.title_id
+       WHERE t.book_id = b.id ORDER BY a.id ASC LIMIT 1) as start_article,
+      (SELECT a.numero FROM articles a
+       JOIN chapters c ON c.id = a.chapter_id
+       JOIN titles t ON t.id = c.title_id
+       WHERE t.book_id = b.id ORDER BY a.id DESC LIMIT 1) as end_article
+      FROM books b
+      ORDER BY b.id ASC
+    ''');
     return List.generate(maps.length, (i) {
       return Book.fromMap(maps[i]);
     });
@@ -261,11 +273,14 @@ class DatabaseHelper {
 
   Future<List<TitleStruct>> getTitles(int bookId) async {
     final db = await database;
-    final List<Map<String, dynamic>> maps = await db.query(
-      'titles',
-      where: 'book_id = ?',
-      whereArgs: [bookId],
-    );
+    final List<Map<String, dynamic>> maps = await db.rawQuery('''
+      SELECT t.*,
+      (SELECT a.numero FROM articles a JOIN chapters c ON c.id = a.chapter_id WHERE c.title_id = t.id ORDER BY a.id ASC LIMIT 1) as start_article,
+      (SELECT a.numero FROM articles a JOIN chapters c ON c.id = a.chapter_id WHERE c.title_id = t.id ORDER BY a.id DESC LIMIT 1) as end_article
+      FROM titles t
+      WHERE t.book_id = ?
+      ORDER BY t.id ASC
+    ''', [bookId]);
     return List.generate(maps.length, (i) {
       return TitleStruct.fromMap(maps[i]);
     });
@@ -330,6 +345,22 @@ class DatabaseHelper {
       await db.rawQuery('SELECT COUNT(*) FROM articles WHERE chapter_id = ? AND section_id IS NULL', [chapterId]),
     );
     return (count ?? 0) > 0;
+  }
+
+  Future<Map<String, String?>> getDirectArticlesRange(int chapterId) async {
+    final db = await database;
+    final startRes = await db.rawQuery(
+      'SELECT numero FROM articles WHERE chapter_id = ? AND section_id IS NULL ORDER BY id ASC LIMIT 1',
+      [chapterId],
+    );
+    final endRes = await db.rawQuery(
+      'SELECT numero FROM articles WHERE chapter_id = ? AND section_id IS NULL ORDER BY id DESC LIMIT 1',
+      [chapterId],
+    );
+    return {
+      'start_article': startRes.isNotEmpty ? startRes.first['numero'] as String? : null,
+      'end_article': endRes.isNotEmpty ? endRes.first['numero'] as String? : null,
+    };
   }
 
   Future<List<Article>> getArticles(int chapterId, {int? sectionId}) async {

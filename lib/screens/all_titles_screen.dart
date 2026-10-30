@@ -67,15 +67,14 @@ class AllTitlesScreen extends StatelessWidget {
                               fontWeight: FontWeight.w600,
                             ),
                       ),
-                      if (item.startArticle != null && item.endArticle != null)
+                      if (formatArticlesRange(item.startArticle, item.endArticle).isNotEmpty)
                         Padding(
                           padding: const EdgeInsets.only(top: 4.0),
                           child: Text(
-                            _formatText(
-                                "(${item.startArticle} à ${item.endArticle})"),
+                            formatArticlesRange(item.startArticle, item.endArticle),
                             style: Theme.of(context)
                                 .textTheme
-                                .bodyMedium
+                                .bodySmall
                                 ?.copyWith(
                                   color: Theme.of(context)
                                       .colorScheme

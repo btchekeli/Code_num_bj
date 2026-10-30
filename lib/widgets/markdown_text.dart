@@ -74,11 +74,13 @@ class MarkdownText extends StatelessWidget {
       if (part.isEmpty) continue;
       final bool isBold = i % 2 == 1;
       final TextStyle currentStyle = isBold
-          ? (style?.copyWith(fontWeight: FontWeight.bold) ?? const TextStyle(fontWeight: FontWeight.bold))
+          ? (style?.copyWith(fontWeight: FontWeight.bold) ??
+              const TextStyle(fontWeight: FontWeight.bold))
           : (style ?? const TextStyle());
 
       if (query.isNotEmpty) {
-        spans.addAll(getHighlightedSpans(part, query, context, style: currentStyle));
+        spans.addAll(
+            getHighlightedSpans(part, query, context, style: currentStyle));
       } else {
         spans.add(TextSpan(text: part, style: currentStyle));
       }

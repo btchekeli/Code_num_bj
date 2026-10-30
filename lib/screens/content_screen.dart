@@ -28,11 +28,14 @@ class ContentScreen extends StatelessWidget {
       final sections = await DatabaseHelper().getSections(parentId);
       final hasDirect = await DatabaseHelper().hasDirectArticlesWithoutSection(parentId);
       if (hasDirect) {
+        final directRange = await DatabaseHelper().getDirectArticlesRange(parentId);
         return [
           Section(
             id: -1,
             title: "Dispositions générales du chapitre",
             chapterId: parentId,
+            startArticle: directRange['start_article'],
+            endArticle: directRange['end_article'],
           ),
           ...sections,
         ];
@@ -111,11 +114,11 @@ class ContentScreen extends StatelessWidget {
                               fontWeight: FontWeight.w600,
                             ),
                       ),
-                      if (startArt != null && endArt != null)
+                      if (formatArticlesRange(startArt, endArt).isNotEmpty)
                         Padding(
                           padding: const EdgeInsets.only(top: 4.0),
                           child: Text(
-                            "(Articles $startArt à $endArt)",
+                            formatArticlesRange(startArt, endArt),
                             style: Theme.of(context)
                                 .textTheme
                                 .bodySmall

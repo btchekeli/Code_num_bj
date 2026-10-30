@@ -82,7 +82,7 @@ class AboutScreen extends StatelessWidget {
               title: 'Assistances, corrections et relectures :',
               contributors: [
                 'Christella W. DEKADJEVI',
-                'Ozias Jawu AHOUSSINOU',
+                'Jawu Ozias AHOUSSINOU',
               ],
             ).animate().fadeIn(delay: 900.ms).slideX(begin: 0.1),
             const SizedBox(height: 24),
@@ -99,6 +99,13 @@ class AboutScreen extends StatelessWidget {
             Center(
               child: Text(
                 'Développé avec amour',
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Center(
+              child: Text(
+                '2026',
                 style: Theme.of(context).textTheme.bodySmall,
               ),
             ),
